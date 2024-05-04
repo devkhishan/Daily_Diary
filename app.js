@@ -13,6 +13,6 @@ app.use(expressLayout)
 app.set('view engine','ejs')
 app.set('layout','./layouts/main')
 
-app.get('/', require('./server/routes/main'))
+app.use('/', require('./server/routes/main'))
 
 app.listen(3000)
