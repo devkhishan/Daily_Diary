@@ -4,12 +4,12 @@ const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
     title: {
-        type: text,
+        type: String,
         required: true
     },
     
     body: {
-        type: text,
+        type: String,
         required: true
     },
     createdAt: {
