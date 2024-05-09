@@ -3,9 +3,38 @@ const router = express.Router()
 const Post = require('../models/Post')
 
 
-router.get('', (req,res) => {
-    res.render('index')
+router.get('', async (req,res) => {
+
+    try{
+        const page = req.query.page || 1
+        const perPage = 1
+
+        const data = await Post.aggregate([ {$sort: {createdAt : -1}} ])
+        .skip(perPage * page - perPage)
+        .limit(perPage)
+        .exec()
+
+        const count = await Post.countDocuments();
+        const nextPage = parseInt(page)+1;
+        const hasNextPage = nextPage <= Math.ceil(count/perPage);
+        
+        res.render('index', { 
+            data,
+            current: page, 
+            nextPage: hasNextPage ? nextPage : null
+         })
+    }catch (e){
+        console.log(e);
+    }
 })
+
+
+
+router.get('/about', (req,res) => {
+    res.render('about')
+})
+
+
 
 
 
@@ -28,9 +57,5 @@ router.get('', (req,res) => {
 
 // insertMore();
 
-
-router.get('/about', (req,res) => {
-    res.render('about')
-})
 
 module.exports = router
