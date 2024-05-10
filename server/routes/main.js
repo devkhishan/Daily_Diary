@@ -28,7 +28,17 @@ router.get('', async (req,res) => {
     }
 })
 
+router.get('/post/', async (req,res) => {
+    try{
+        // const iden = req.params.id;
+        // const data = await Post.findById(iden);
 
+        res.render('post')
+    }
+    catch (e){
+        console.log(e);
+    }
+})
 
 router.get('/about', (req,res) => {
     res.render('about')
