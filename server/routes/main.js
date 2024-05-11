@@ -28,12 +28,12 @@ router.get('', async (req,res) => {
     }
 })
 
-router.get('/post/', async (req,res) => {
+router.get('/post/:id', async (req,res) => {
     try{
-        // const iden = req.params.id;
-        // const data = await Post.findById(iden);
+        let iden = req.params.id;
+        const data = await Post.findById({_id: iden});
 
-        res.render('post')
+        res.render('post',{data})
     }
     catch (e){
         console.log(e);

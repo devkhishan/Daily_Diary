@@ -9,7 +9,7 @@ const PORT = 3000 || process.env.PORT
 // Connect the Database
 connectDB();
 
-app.use(express.static('public')) 
+app.use(express.static("public")) 
 
 // Templating Engine 
 app.use(expressLayout)
