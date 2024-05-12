@@ -40,6 +40,30 @@ router.get('/post/:id', async (req,res) => {
     }
 })
 
+
+router.post('/search', async (req,res) => {
+    try{
+
+        let searchTerm = req.body.searchTerm
+        const noSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g,"")
+        
+        const data = await Post.find({
+            $or : [
+                {title: {$regex: new RegExp(noSpecialChar, 'i')}},
+                {body: {$regex: new RegExp(noSpecialChar, 'i')}}
+            ]
+        })
+
+        res.render('search', { data })
+    }catch(e){
+        console.log(e);
+    }
+})
+
+
+
+
+
 router.get('/about', (req,res) => {
     res.render('about')
 })
