@@ -20,5 +20,6 @@ app.set('layout','./layouts/main')
 
 
 app.use('/', require('./server/routes/main'))
+app.use('/', require('./server/routes/admin'))
 
 app.listen(3000)
